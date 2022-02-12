@@ -10,12 +10,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {authContext} from '../Provider/AuthContext';
-
+import Alert from './Alert';
 const theme = createTheme();
-
 export default function Register() {
+  const Navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const [form,setForm] = useState({
     username:'',
     email:'',
@@ -31,13 +32,16 @@ export default function Register() {
     const {RegisterContext} = data;
     try {
       const account = await RegisterContext(form);
+      if(!account.success){
+        setAlert(account.message);
+        setTimeout(()=>setAlert(null),3000)
+      }
       /* if(account.success){
         localStorage.removeItem('access_token');
         localStorage.setItem('access_token',account.accessToken)
       } */
-      console.log(account);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 
@@ -59,6 +63,7 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          <Alert message={alert}/>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

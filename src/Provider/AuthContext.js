@@ -64,8 +64,8 @@ const AuthContextProvider = ({children}) =>{
             const response = await axios.post('https://music-app-lofi.herokuapp.com/auth/register',form)
             if(response.data.success){
                 localStorage.setItem('access_token',response.data.accessToken);
-                
-                return response.data
+                await userLogin();
+                return response.data;
             }
         } catch (error) {
             if(error.response.data){
