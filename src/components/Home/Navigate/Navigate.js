@@ -9,6 +9,7 @@ import AudioM from "./AudioM";
 import { NavigateContext } from "../../../Provider/NavigateContext";
 import { AppContext } from "../../../Provider/AppContext";
 import { SET_MUSICREF } from "../../../Reducer/type";
+import Modal4 from "./Modal4";
 const Navigate = () => {
 
   /* const {dispatch} = useContext(NavigateContext);*/
@@ -35,7 +36,7 @@ const Navigate = () => {
               <Modal2/>
             </li>
             <li>
-              <img src="/imgs/hourglass-outline.svg" alt="" />
+              <Modal4/>
             </li>
           </ul>
         </div>

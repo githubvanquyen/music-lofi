@@ -13,34 +13,43 @@ const ButtonMS = () => {
       }
     });
   },[])
-  const handlePlayPre = async () => {
-      if(playCurrent > 0){
-        dispatch({
-          type: SET_PLAYCURRENT,
-          payload: playCurrent - 1,
-        })
-      }
-      else{
-          dispatch({
-            type: SET_PLAYCURRENT,
-            payload: playlist.length - 1,
-          })
-      }
-    console.log(playCurrent);
+  
+  useEffect(async()=>{
     try {
-      const dataMusic = await getMusic(playlist[playCurrent - 1].id);
+      const dataMusic = await getMusic(playlist[playCurrent].id);
       if (dataMusic.success) {
         music.src = dataMusic.data[128];
-        music.play();
+        music.play()
+          .then(() => {
+            // Automatic playback started!
+            // Show playing UI.
+            console.log('loaded music');
+          })
+          .catch(error => {
+            console.log(error);
+          });
         setPlay(true);
-      }
+        }
     } catch (error) {
       console.log(error.message);
     }
+  },[playCurrent])
+  const handlePlayPre = async () => {
+    if(playCurrent > 0){
+      dispatch({
+        type: SET_PLAYCURRENT,
+        payload: playCurrent - 1,
+      })
+    }
+    else{
+        dispatch({
+          type: SET_PLAYCURRENT,
+          payload: playlist.length - 1,
+        })
+    }
   };
   const handlePlayNext = async () => {
-    console.log(playCurrent);
-      if(playCurrent > playlist.length - 1){
+      if(playCurrent > playlist.length - 2){
         dispatch({
           type: SET_PLAYCURRENT,
           payload: 0,
@@ -52,18 +61,6 @@ const ButtonMS = () => {
           payload: playCurrent + 1,
         })
       }
-    console.log(playCurrent);
-
-    try {
-      const dataMusic = await getMusic(playlist[playCurrent+1].id);
-      if (dataMusic.success) {
-        music.src = dataMusic.data[128];
-        music.play();
-        setPlay(true);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
   };
   const pre = "pre";
   const next = "next";

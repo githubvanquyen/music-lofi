@@ -61,7 +61,15 @@ const Search = () => {
       const dataMusic = await getMusic(song.id);
       if (dataMusic.success) {
         musicRef.src = dataMusic.data[128];
-        musicRef.play();
+        musicRef.play()
+          .then(() => {
+            // Automatic playback started!
+            // Show playing UI.
+            console.log('loaded music');
+          })
+          .catch(error => {
+            console.log(error);
+          });
         setPlay(true);
       }
     } catch (error) {

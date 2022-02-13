@@ -650,6 +650,82 @@ body {
 .nav-mobile{
   display: none;
 }
+.timer{
+  position: absolute;
+  right: 59.25px;
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+  top: -75px;
+  font-size: 20px;
+  height: max-content;
+  width: 300px;
+  padding: 16px;
+  border-radius: 20px;
+  display: none;
+  transform-origin: right;
+  animation: scaleltr 0.5s ease;
+}
+.timer> div> input[type="time"]{
+  width: 100%;
+  height: max-content;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  margin: 16px 0px;
+  transform-origin: bottom;
+  animation: updown 0.5s ease;
+}
+input[type=time]::-webkit-datetime-edit-text {
+  padding: 16px 4px;
+}
+
+input[type="time"]::-webkit-datetime-edit-hour-field {
+  background-color: #14141d;
+  border-radius: 15%;
+  padding: 16px 12px;
+}
+input[type=time]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  align-items: center;
+}
+input[type=time]::-webkit-datetime-edit-ampm-field {
+  background-color: #14141d;
+  border-radius: 15%;
+  padding: 16px 12px;
+}
+
+/* Minute */
+input[type="time"]::-webkit-datetime-edit-minute-field {
+  background-color: #14141d;
+  border-radius: 15%;
+  padding: 16px 12px
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(71%) sepia(90%) saturate(407%) hue-rotate(328deg) brightness(96%) contrast(98%);
+  cursor: pointer;
+}
+input[type="time"]::-webkit-calendar-picker-indicator{
+  filter: invert(97%) sepia(98%) saturate(8%) hue-rotate(138deg) brightness(102%) contrast(103%);
+}
+.timer> div> input:hover{
+  cursor: pointer;
+}
+.btn-unset{
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  background-color: #14141d;
+  color: white;
+  font-size: 18px;
+  border-radius: 7px;
+  transform-origin: bottom;
+  animation: updown 0.5s ease;
+}
+.btn-unset:hover{
+  color: #f3a952;
+  cursor: pointer;
+}
 @media screen and (max-width: 739px){
   .navgation{
     padding: 0 0px;
@@ -738,9 +814,6 @@ body {
   .function-bar> div> ul> li> img{
     width: 32px;
   }
-  .function-bar> div> ul> li:active{
-    background-color: rgba(0,0,0,0.9);
-  }
   .mode-music{
     right: 0;
     left:0;
@@ -801,6 +874,18 @@ body {
     border-radius: unset;
     z-index: 10;
     text-align: left;
+  }
+  .timer{
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: unset;
+    bottom: 71.2px;
+    width: 100vw;
+    text-align: left;
+    height: max-content;
+    border-radius: unset;
+    z-index: 10;
   }
 
 }
