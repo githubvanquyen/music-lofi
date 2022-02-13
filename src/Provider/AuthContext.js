@@ -18,7 +18,7 @@ const AuthContextProvider = ({children}) =>{
             setAuthHeader(localStorage['access_token'])
         }
         try {
-            const response = await axios.get('http://music-app-lofi.herokuapp.com/auth')
+            const response = await axios.get('https://music-app-lofi.herokuapp.com/auth')
             if(response.data.success){
                 dispatch({
                     type: AUTH_LOGIN,
@@ -44,7 +44,7 @@ const AuthContextProvider = ({children}) =>{
 
     const LoginContext = async (form) =>{
         try {
-            const response = await axios.post('http://music-app-lofi.herokuapp.com/auth/login',form)
+            const response = await axios.post('https://music-app-lofi.herokuapp.com/auth/login',form)
             if(response.data.success){
                 localStorage.setItem('access_token',response.data.accessToken);
                 await userLogin()
@@ -61,7 +61,7 @@ const AuthContextProvider = ({children}) =>{
     } 
     const RegisterContext = async (form)=>{
         try {
-            const response = await axios.post('http://music-app-lofi.herokuapp.com/auth/register',form)
+            const response = await axios.post('https://music-app-lofi.herokuapp.com/auth/register',form)
             if(response.data.success){
                 localStorage.setItem('access_token',response.data.accessToken);
                 await userLogin();

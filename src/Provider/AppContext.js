@@ -59,7 +59,7 @@ const AppContextProvider = ({ children }) => {
   const getListMusic = async (nameMusic) => {
     try {
       const response = await axios.post(
-        "http://music-app-lofi.herokuapp.com/song/search-song",
+        "https://music-app-lofi.herokuapp.com/song/search-song",
         nameMusic
       );
       if (response.data.success) {
@@ -76,7 +76,7 @@ const AppContextProvider = ({ children }) => {
 
   const getMusic = async (id) =>{
     try {
-      const response = await axios.post('http://music-app-lofi.herokuapp.com/song/detail-song',{id: id})
+      const response = await axios.post('https://music-app-lofi.herokuapp.com/song/detail-song',{id: id})
       if(response.data.success){
         return response.data;
       }
