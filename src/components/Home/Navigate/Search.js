@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
-import '../Home.css'
+import "../Home.css";
 import { AppContext } from "../../../Provider/AppContext";
 import {
   SET_MODALFUNC,
@@ -10,8 +10,10 @@ import {
 } from "../../../Reducer/type";
 
 const Search = () => {
-  const { getListMusic, getMusic, app, handleClick,setPlay, dispatch} = useContext(AppContext);
-  const musicRef = app.music
+  const { getListMusic, getMusic, app, handleClick, setPlay, dispatch, play } =
+    useContext(AppContext);
+  const musicRef = app.music;
+  const { playCurrent } = app;
   const [nameMusic, setNameMusic] = useState({
     name: "",
   });
@@ -35,39 +37,40 @@ const Search = () => {
       dispatch({
         type: SET_PLAYLIST,
         payload: [],
-      })
+      });
       dropboxSearch.current.classList.remove("append");
     } else {
       try {
         const music = await getListMusic(nameMusic);
         //setPlaylist([...music.data]);
         dispatch({
-          type:SET_PLAYLIST,
+          type: SET_PLAYLIST,
           payload: [...music.data],
-        })
+        });
       } catch (error) {
         console.log(error.message);
       }
     }
   };
-  const handleGetMusic = async (song,index) => {
+  const handleGetMusic = async (song, index) => {
     //setPlayCurrent(index);
     dispatch({
       type: SET_PLAYCURRENT,
       payload: index,
-    })
+    });
     console.log(index);
     try {
       const dataMusic = await getMusic(song.id);
       if (dataMusic.success) {
         musicRef.src = dataMusic.data[128];
-        musicRef.play()
+        musicRef
+          .play()
           .then(() => {
             // Automatic playback started!
             // Show playing UI.
-            console.log('loaded music');
+            console.log("loaded music");
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
         setPlay(true);
@@ -93,38 +96,74 @@ const Search = () => {
 
   return (
     <>
-    <img src="/imgs/magnifying-glass.png" alt="" onClick={() =>handleClick(searchMusic)}/>
-    <div className="search-music" ref={searchMusic}>
-      <input
-        type="text"
-        placeholder="Enter song name.."
-        value={nameMusic.name}
-        onChange={handleSearchNameMusic}
-        ref={searchRef}
-      />{/* 
+      <img
+        src="/imgs/magnifying-glass.png"
+        alt=""
+        onClick={() => handleClick(searchMusic)}
+      />
+      <div className="search-music" ref={searchMusic}>
+        <input
+          type="text"
+          placeholder="Enter song name.."
+          value={nameMusic.name}
+          onChange={handleSearchNameMusic}
+          ref={searchRef}
+        />
+        {/* 
       <SearchIcon className="search-icon" onClick={handleOpenSearch} /> */}
-        <p style={{fontSize:'18px', fontWeight:'600', color:'#fff', padding:'8px 0 0 8px'}}>Result</p> 
-      <div className="drop-result-search" ref={dropboxSearch}>
-        <ul>
-          {app.playlist.map((song, index) => (
-            <li key={index} onClick={() => handleGetMusic(song,index)}>
-              <div className="thumb-music">
-                <img
-                  src={`https://photo-resize-zmp3.zadn.vn/w94_r1x1_jpeg/${song.thumb}`}
-                  style={{ width: "100%", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="info-music">
-                <div>{song.name}</div>
-                <div style={{ fontSize: "14px", color: "#ccc" }}>
-                  {song.artist}
+        <p
+          style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            color: "#fff",
+            padding: "8px 0 0 8px",
+          }}
+        >
+          Result
+        </p>
+        <div className="drop-result-search" ref={dropboxSearch}>
+          <ul>
+            {app.playlist.map((song, index) => (
+              <li
+                key={index}
+                style={
+                  playCurrent === index
+                    ? play
+                      ? { opacity: "0.5" }
+                      : { opacity: "0.5" }
+                    : {}
+                }
+                onClick={() => handleGetMusic(song, index)}
+              >
+                <div className="thumb-music">
+                  <img
+                    src={`https://photo-resize-zmp3.zadn.vn/w94_r1x1_jpeg/${song.thumb}`}
+                    style={{ width: "100%", borderRadius: "8px" }}
+                  />
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <div
+                  className="music-gif"
+                  style={
+                    playCurrent === index
+                      ? play
+                        ? { opacity: "1" }
+                        : { opacity: "0" }
+                      : { opacity: "0" }
+                  }
+                >
+                  <img src="/effect/Dft8K.gif" />
+                </div>
+                <div className="info-music">
+                  <div>{song.name}</div>
+                  <div style={{ fontSize: "14px", color: "#ccc" }}>
+                    {song.artist}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
     </>
   );
 };

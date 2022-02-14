@@ -1,9 +1,9 @@
 import React,{useContext, useRef, useEffect} from 'react'
 import { AppContext } from '../../../Provider/AppContext'
-import { SET_MUSICREF } from '../../../Reducer/type';
+import { SET_MUSICREF, SET_PLAYCURRENT } from '../../../Reducer/type';
 const AudioM = () => {
     const musicRef = useRef();
-    const {dispatch, setPlay} = useContext(AppContext);
+    const {dispatch, play, setPlay, app:{playCurrent}} = useContext(AppContext);
     useEffect(() =>{
         dispatch({
             type:SET_MUSICREF,
@@ -14,7 +14,12 @@ const AudioM = () => {
     },[])
 
     const handleChangeBtn = ()=>{
-        setPlay(false);
+        if(play){
+          dispatch({
+            type: SET_PLAYCURRENT,
+            payload: playCurrent + 1
+          })
+        }
     }
   return (
     <div>

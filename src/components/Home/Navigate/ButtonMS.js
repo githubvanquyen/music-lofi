@@ -62,8 +62,7 @@ const ButtonMS = () => {
         })
       }
   };
-  const pre = "pre";
-  const next = "next";
+  
   return (
     <div className="music-nav">
       <img className="btn-pre" src="/imgs/previous.3b347466.svg" alt="" onClick={handlePlayPre}/>

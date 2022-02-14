@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { AppContext } from "../../../Provider/AppContext";
 const Modal4 = () => {
-  const { app, handleClick } = useContext(AppContext);
+  const { app, handleClick, setPlay } = useContext(AppContext);
   const { music } = app;
   const timerRef = useRef();
   const [time, setTime] = useState("");
@@ -16,6 +16,7 @@ const Modal4 = () => {
   if (time !== "") {
     setTimeout(() => {
       music.pause();
+      setPlay(false);
     }, second * 1000);
   }
   return (

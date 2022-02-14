@@ -626,6 +626,20 @@ body {
 .drop-result-search > ul> li{
   padding: 8px 0;
   display: flex;
+  position: relative;
+}
+
+.drop-result-search > ul> li> .music-gif{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 0;
+  top: 8px;
+}
+
+.drop-result-search > ul> li> .music-gif> img{
+  height: 40px;
+  filter: invert(96%) sepia(4%) saturate(0%) hue-rotate(328deg) brightness(105%) contrast(105%);
 }
 
 .drop-result-search > ul> li > .thumb-music{
