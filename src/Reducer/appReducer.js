@@ -1,4 +1,4 @@
-import { SET_BGAPP, GET_BGREF, SET_MODALFUNC, SET_MUSICREF, SET_OPENSEARCH, SET_BTN, SET_PLAYLIST, SET_PLAYCURRENT } from "./type";
+import { SET_BGAPP, GET_BGREF, SET_MODALFUNC, SET_MUSICREF, SET_OPENSEARCH, SET_BTN, SET_PLAYLIST, SET_PLAYCURRENT,SET_AUTOBG } from "./type";
 const appReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -7,6 +7,11 @@ const appReducer = (state, action) => {
         ...state,
         lightBackground: !state.lightBackground,
       };
+    case SET_AUTOBG:
+      return{
+        ...state,
+        lightBackground: payload
+      }
     case GET_BGREF:
       return {
         ...state,

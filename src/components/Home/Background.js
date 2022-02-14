@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useReducer, useRef } from "react";
 import "./Home.css";
 import { AppContext } from "../../Provider/AppContext";
-import { GET_BGREF } from "../../Reducer/type";
+import { GET_BGREF, SET_AUTOBG } from "../../Reducer/type";
 
 const Background = () => {
-  const {  dispatch } = useContext(AppContext);
-
+  const {  dispatch ,app } = useContext(AppContext);
+  const {lightBackground} = app;
   const lightRef = useRef();
   const darkRef = useRef();
 
@@ -17,6 +17,24 @@ const Background = () => {
             darkRef: darkRef,
         },
       });
+    const timeNow = new Date;
+    const hour = timeNow.getHours();
+    console.log(hour);
+    if(hour > 7 && hour < 18){
+      dispatch({
+        type: SET_AUTOBG,
+        payload: true
+      })
+      lightRef.current.style.opacity = "1";
+      darkRef.current.style.opacity = "0";
+    }else{
+      dispatch({
+      type: SET_AUTOBG,
+      payload: false,
+      })
+      lightRef.current.style.opacity = "0";
+      darkRef.current.style.opacity = "1";
+    }
   }, []);
   return (
     <div className="background-video">

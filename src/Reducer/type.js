@@ -4,6 +4,7 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 //appContext
 export const SET_BGAPP = "SET_BGAPP";
+export const SET_AUTOBG = "SET_AUTOBG";
 export const GET_BGREF = "GET_BGREF";
 export const SET_MODALFUNC = "SET_MODALFUNC";
 export const SET_MUSICREF = "SET_MUSICREF";

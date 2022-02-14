@@ -3,8 +3,8 @@ import "./Home.css";
 import { AppContext } from "../../Provider/AppContext";
 import HeaderM from "./HeaderM";
 const Header = () => {
-  const { changeBackground, fullScreenApp} = useContext(AppContext);
-
+  const { changeBackground, fullScreenApp, app} = useContext(AppContext);
+  const {lightBackground} = app;
   return (
     <div className="navgation">
       <div className="logo">
@@ -49,6 +49,7 @@ const Header = () => {
         <input
           type="checkbox"
           id="switch"
+          checked={!lightBackground}
           className="switch-input"
           onChange={changeBackground}
         />

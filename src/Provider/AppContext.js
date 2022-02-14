@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import appReducer from "../Reducer/appReducer";
 import { SET_BGAPP, SET_MODALFUNC, SET_MUSICREF } from "../Reducer/type";
 import axios from "axios";
