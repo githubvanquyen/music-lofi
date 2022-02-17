@@ -181,7 +181,28 @@ body {
 .menu-bar > li:hover .sub-menu {
   display: block;
 }
-
+.logout{
+  display:flex;
+  align-items: center;
+}
+.logout-btn{
+  outline: none;
+  border-radius: 20px;
+  height: 40px;
+  width : 100px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: white;
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+}
+.logout-btn:hover{
+  color: #ccc;
+  border-color: #ccc;
+  cursor: pointer;
+}
 @keyframes updown {
   from {
     transform: scaleY(0);
@@ -743,7 +764,7 @@ input[type="time"]::-webkit-calendar-picker-indicator{
 @media screen and (max-width: 739px){
   .navgation{
     padding: 0 0px;
-    justify-content:space-around
+    justify-content:space-around;
   }
   .navgation> .nav{
     display: none;
@@ -900,6 +921,9 @@ input[type="time"]::-webkit-calendar-picker-indicator{
     height: max-content;
     border-radius: unset;
     z-index: 10;
+  }
+  .logout{
+    display: none;
   }
 
 }

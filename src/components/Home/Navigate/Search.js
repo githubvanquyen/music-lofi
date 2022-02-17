@@ -154,8 +154,8 @@ const Search = () => {
                   <img src="/effect/Dft8K.gif" />
                 </div>
                 <div className="info-music">
-                  <div>{song.name}</div>
-                  <div style={{ fontSize: "14px", color: "#ccc" }}>
+                  <div style={{fontSize:'15px', paddingBottom:'4px'}}>{song.name}</div>
+                  <div style={{ fontSize: "13px", color: "#ccc" }}>
                     {song.artist}
                   </div>
                 </div>

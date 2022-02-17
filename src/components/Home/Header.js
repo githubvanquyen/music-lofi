@@ -1,10 +1,24 @@
 import React, { useContext, useRef } from "react";
 import "./Home.css";
 import { AppContext } from "../../Provider/AppContext";
+import { authContext } from "../../Provider/AuthContext";
 import HeaderM from "./HeaderM";
+import { AUTH_LOGOUT } from "../../Reducer/type";
 const Header = () => {
   const { changeBackground, fullScreenApp, app} = useContext(AppContext);
+  const {auth, dispatch} = useContext(authContext);
   const {lightBackground} = app;
+
+  const handleLogout =()=>{
+    localStorage.removeItem('access_token');
+    dispatch({
+      type: AUTH_LOGOUT,
+      payload:{
+        isAuthenticated: false,
+        user: null,
+      }
+    })
+  }
   return (
     <div className="navgation">
       <div className="logo">
@@ -57,6 +71,7 @@ const Header = () => {
         <img src="/imgs/fullscreen.a76b5d15.svg" width="26px" id="zoom-out" alt="" title="fullscreen" onClick={fullScreenApp}/>
       </div>
       <HeaderM /> 
+      <div className="logout"><button className="logout-btn" onClick={handleLogout}>Log out</button></div>
     </div>
   );
 };

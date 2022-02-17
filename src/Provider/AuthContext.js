@@ -81,6 +81,7 @@ const AuthContextProvider = ({children}) =>{
         LoginContext,
         RegisterContext,
         auth,
+        dispatch,
         userLogin,
     }
     return(
