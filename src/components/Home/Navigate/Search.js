@@ -123,7 +123,7 @@ const Search = () => {
         </p>
         <div className="drop-result-search" ref={dropboxSearch}>
           <ul>
-            {app.playlist.map((song, index) => (
+            {app.playlist.slice(0,10).map((song, index) => (
               <li
                 key={index}
                 style={

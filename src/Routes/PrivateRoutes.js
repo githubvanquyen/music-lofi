@@ -1,19 +1,23 @@
-import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { authContext } from '../Provider/AuthContext';
-import Box from '@mui/material/Box';
-import CircularProgress  from '@mui/material/CircularProgress';
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { authContext } from "../Provider/AuthContext";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
- const PrivateRoutes =({children})=>{
-    const {auth:{isAuthenticated, isLoaded}} = useContext(authContext);
-    if(isLoaded){
-        return(
-            <Box sx={{display:'flex', marginTop: '300px', justifyContent:'center'}}>
-                <CircularProgress />
-            </Box>
-        ) 
-    }else{
-        return isAuthenticated ? <Navigate to="/"/> : children;
-    }
-}
+const PrivateRoutes = ({ children }) => {
+  const {
+    auth: { isAuthenticated, isLoaded },
+  } = useContext(authContext);
+  if (isLoaded) {
+    return (
+      <Box
+        sx={{ display: "flex", marginTop: "300px", justifyContent: "center" }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  } else {
+    return isAuthenticated ? <Navigate to="/" /> : children;
+  }
+};
 export default PrivateRoutes;
